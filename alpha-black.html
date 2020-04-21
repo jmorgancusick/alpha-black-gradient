@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #grad1 {
+          /* height: 200px; */
+          background-repeat: no-repeat;
+          background-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1)); /* Standard syntax (must be last) */
+      }
+      #img-foreground {
+          background-repeat: no-repeat;
+          /* height: 200px; */
+          /* background-image: url("Starry-Night-canvas-Vincent-van-Gogh-New-1889.jpg"); */
+      }
+    </style>
+  </head>
+  <body>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+    
+    
+    <script>
+      var src = 'Starry-Night-canvas-Vincent-van-Gogh-New-1889.jpg';
+      var img = new Image();
+      img.onload = function() {
+          document.getElementById('img-foreground').style.backgroundImage = "url('" + src + "')";
+          // console.log(this.height)
+          // console.log(typeof(this.width))
+          document.getElementById('img-foreground').style.height = this.height.toString() + "px";
+          document.getElementById('img-foreground').style.width = this.width.toString() + "px";
+          document.getElementById('grad1').style.height = this.height.toString() + "px";
+          document.getElementById('grad1').style.width = this.width.toString() + "px";
+
+          html2canvas(document.querySelector("#img-foreground"), {width: this.width, height: this.height}).then(canvas => {
+              document.body.appendChild(canvas)
+          });
+      }
+      img.src = src;
+      
+    </script>
+
+    
+    <h1>Linear Gradient - Transparency</h1>
+    <p>To add transparency, we use the rgba() function to define the color stops. The last parameter in the rgba() function can be a value from 0 to 1, and it defines the transparency of the color: 0 indicates full transparency, 1 indicates full color (no transparency).</p>
+
+    <div id="img-foreground">
+      <div id="grad1"></div>
+    </div>
+
+
+
+    <p><strong>Note:</strong> Internet Explorer 9 and earlier versions do not support gradients.</p>
+
+  </body>
+</html>
